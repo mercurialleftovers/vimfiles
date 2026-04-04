@@ -1,0 +1,6 @@
+{
+	"!": "<!DOCTYPE html>\n<html>\n<head>\n<title>{{ title }}</title>\n<link rel=\"stylesheet\" href=\"#\">\n</head>\n\t<body>\n\tcursor\n\t</body>\n</html>",
+	"link": "<link rel=\"stylesheet\" href=\"#\">",
+	"js": "<script src=\"#\">cursor</script>",
+	"script": "<script>\ncursor\n</script>"
+}

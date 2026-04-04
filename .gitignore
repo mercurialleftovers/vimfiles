@@ -1,0 +1,6 @@
+swapdir/*
+backupdir/*
+undodir/*
+__*
+.netrwhist
+

@@ -1,0 +1,7 @@
+[ ] - make a python decorators intro using matplotlib, the decorator would take a function and plot it:
+
+```python
+@plot(from_: 0, to_:10)
+def square(i: int) -> int:
+	return i ** 2
+```

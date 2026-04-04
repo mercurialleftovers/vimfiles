@@ -1,0 +1,19 @@
+{
+	"!": "* {\n\tpadding: 0rem;\nmargin: 0rem;\n}\n",
+	"clear": "* {\n\tpadding: 0rem;\nmargin: 0rem;\n}\n",
+	"ff": "font-family:\"Monospace\";",
+	"fs": "font-size: 1rem;",
+	"bgc": "background-color: #444444;",
+	"c": "color: #444444;",
+	"bg": "background:;",
+	"df": "display: flex; // ",
+	"fd": "flex-direction: column; // row-reverse | column | column-reverse",
+	"fw": "flex-wrap: wrap; // nowrap | wrap | wrap-reverse;",
+	"fg": "flex-grow: 0;",
+	"fs": "flex-shrink: 0;",
+	"ff": "flex-flow: column wrap; // shorthand for flex-direction and flex-wrap",
+	"jc": "justify-content: flex-start; // flex-end | center | space-between | space-around | space-evenly | start | end | left | right ... + safe | unsafe;",
+	"ai": "align-items: stretch; // flex-start | flex-end | center | baseline | first baseline | last baseline | start | end | self-start | self-end + ... safe | unsafe;" ,
+	"rg": "row-gap: 1rem;",
+	"cg": "column-gap: 1rem;"
+}
