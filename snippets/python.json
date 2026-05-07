@@ -1,0 +1,8 @@
+{
+	"orm": "from __future__ import annotations\nfrom sqlalchemy import (ForeignKey, Integer, String, Boolean, DateTime, create_engine, )\nfrom sqlalchemy.orm import (relationship, DeclarativeBase, Session, Mapped, mapped_column, )\nfrom datetime import datetime, UTC\n",
+	"fast": "from fastapi import (FastAPI, Request, Response, HTTPException, Depends, Form, APIRouter, File, UploadFile, )\nfrom fastapi.responses import (HTMLResponse, JSONResponse, )\nfrom fastapi.staticfiles import StaticFiles\nfrom fastapi.templating import Jinja2Templates\n",
+	"pydantic": "from pydantic import (BaseModel, EmailStr, ConfigDict, Field, )\nfrom typing import Annotated\n",
+	"thread": "from threading import Thread\n",
+	"t1": "t1 = Thread(target=insert_here, args=())\n"
+}
+

@@ -2,5 +2,6 @@ swapdir/*
 backupdir/*
 undodir/*
 __*
-.netrwhist
+**/.netrwhist
+**/.todo
 

@@ -22,11 +22,9 @@ syntax on
 &smartindent = true
 &smarttab = true
 &tabstop = 4
+&softtabstop = 4
 &shiftwidth = 4
-
-if &filetype == "python"
-    &expandtab = true
-endif
+&expandtab = true
 
 &guifont = 'Lucida Console:h11:cANSI:qDRAFT'
 &guioptions = "aic"
@@ -35,14 +33,14 @@ execute $"colorscheme {g:colors_name}"
 &listchars = 'eol:;,tab:-->,lead:.'
 &belloff = 'all'
 &laststatus = 2
-&statusline = $"%2.4n: %f \ \ \ %m %r %h  l%6.8l :c%3.3c %3.3p%%"
-# &timeoutlen = 300
+&statusline = $"%2.4n: %f \ \ \ %m %r %h  l%6.8l :c%6.8c %4.4p%%"
 # autocmd BufRead * :set foldmethod=indent
 &foldmethod = "indent"
-# var salutation: string = $"{$USERNAME} @ {$OS} @ {expand('.')}"
-# autocmd VimEnter * :echo salutation
-
 &clipboard = 'unnamed,unnamedplus'
+
+&backup = false
+&writebackup = false
+&swapfile = false
 
 &undodir = expand('~/vimfiles/undodir')
 &directory = expand('~/vimfiles/swapdir')
@@ -53,11 +51,13 @@ execute $"colorscheme {g:colors_name}"
 &swapfile = false
 
 &autoread = true
-
 &incsearch = true
 # &inccommand = "split" # TODO(bader): this is a neovim exclusive, live preview of :/s substitutions
-&ignorecase = true
+# &ignorecase = true
 &smartcase = true # when you deliberately type caps, case is not ignored
+# this was fetched from stackoverflow to make autocompletion casesensitive
+au InsertEnter * set noignorecase
+au InsertLeave * set ignorecase
 &scrolloff = 10
 &signcolumn = "yes" #TODO(bader): investigate
 
@@ -66,10 +66,16 @@ execute $"colorscheme {g:colors_name}"
 
 &signcolumn = "yes"
 
-&updatetime = 50
+&updatetime = 300
+&ttimeoutlen = 0
+&autowrite = false
 # &colorcolumn = "80"
 &mouse = "a"
 # &isfname = "@-@" # TODO(bader): future revisit this
 # &editorconfig = true # TODO(bader): appears to be a neovim exclusive as well
 
 # set guicursor+=i:ver100-iCursor 
+
+# &backspace = "indent,eol,start" # better backspace behavior
+
+auto FileType html set filetype=htmldjango

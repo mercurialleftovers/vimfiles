@@ -28,15 +28,23 @@ vnoremap <silent> <f5> :call g:RunSnippet()<enter>
 #---------------------------------------
 # autocmd BufNewFile,BufRead requirements.txt set ft=python
 # autocmd BufNewFile,BufRead *.* set ft=md
-autocmd FileType python source $MYVIMDIR/python_keymaps.vim
+# autocmd FileType python source $MYVIMDIR/python_keymaps.vim # TODO(bader): moved to PythonLinters.vim
 #---------------------------------------
 # vscode ctrl-d function:
 # 1- follow the word under the cursor
-vnoremap <c-f> *
+vnoremap <c-f> *iw
 nnoremap <c-f> viw"cygv
 inoremap <c-f> <esc>viw"cygv
 # 2- now do the swapping logic:
-vnoremap <c-d> <esc>:s/
+def g:SearchAndReplace(): void
+	var word: string = @c
+	var replacement: string = input($"enter replacement for {word} >")
+	var cmd: string = $"'<,'>:s/{word}/{replacement}/g"
+	execute cmd
+
+enddef
+
+vnoremap <c-d> <esc>:call g:SearchAndReplace()<CR>
 
 def g:ReplaceWordWith(): void
 	var newWord: string = input($"change {@c} with: ")
@@ -46,7 +54,6 @@ enddef
 
 vnoremap f <c-w>:call g:ReplaceWordWith()<CR>
 
-# bader is bader
 # todo:
 # figure out if * does save the word to a register
 # figure out how to yank to the normal mode command field, the one after the colon (:)
@@ -55,9 +62,9 @@ vnoremap f <c-w>:call g:ReplaceWordWith()<CR>
 # nnoremap :templ_py 
 
 # lex
-vnoremap <c-b> <esc>:Lex 10<enter>
-nnoremap <c-b> :Lex 10<enter>
-inoremap <c-b> <esc>Lex 10<enter>
+vnoremap <c-b> <esc>:Lex 20<enter>
+nnoremap <c-b> :Lex 20<enter>
+inoremap <c-b> <esc>Lex 20<enter>
 
 # windows stuff
 vnoremap <c-h> <esc><c-w>h
@@ -76,6 +83,7 @@ vnoremap <c-l> <esc><c-w>l
 inoremap <c-l> <esc><c-w>l
 nnoremap <c-l> <c-w>l
 
+# TODO(bader): what did I use this for and is it still in action ?
 # windows movement
 var problem: bool = true
 if !problem
@@ -114,7 +122,7 @@ cnoremap <c-v> <c-r>+
 # emacs-like ctrl-o
 inoremap <c-o> <esc>:w<enter>a
 # ctrl-space for autocompletion
-inoremap <c-space> <c-n>
+# inoremap <c-space> <c-n>
 # tab to toggle fold in normal mode
 nnoremap <tab> za
 # tab to indent in visual mode
@@ -141,8 +149,8 @@ nnoremap K V:call g:MoveSelection("up")<CR>gv
 # NOTE(bader): this worked when I switched <enter> with <CR>
 vnoremap J :m '>+1<CR>gv=gv 
 vnoremap K :m '<-2<CR>gv=gv
-nnoremap J V:m '>+1<CR>gv=gv
-nnoremap K V:m '<-2<CR>gv=gv
+nnoremap J :m .+1<CR>==
+nnoremap K :m .-2<CR>==
 # some function calls
 vnoremap <f2> <esc>:call g:ToggleNumber()<enter>
 inoremap <f2> <esc>:call g:ToggleNumber()<enter>
@@ -152,12 +160,8 @@ vnoremap <f9> <esc>:call g:ToggleHotReload()<enter>
 inoremap <f9> <esc>:call g:ToggleHotReload()<enter>
 nnoremap <f9> :call g:ToggleHotReload()<enter>
 
-nnoremap <f9> :silent call system("explorer")<enter>
-nnoremap <f10> :call system("explorer")<enter>
-nnoremap <c-space> :call g:SwapWordForSnippet()<enter><enter>
-inoremap <c-space> <esc>:call g:SwapWordForSnippet()<enter><enter>a
 
-nnoremap <f12> :call g:CommentLine()<enter>
+# nnoremap <f12> :call g:CommentLine()<enter>
 # terminal stuff
 # tnoremap mapping -----------------------
 def g:CopyIntoTerminal(): void
@@ -181,11 +185,13 @@ inoremap <c-enter> :term<enter>
 vnoremap <c-enter> :term<enter>
 # ----------------------------------------
 # c-q
-nnoremap <c-q> :q<enter>
-inoremap <c-q> <esc>:q<enter>
-vnoremap <c-q> :q<enter>
+nnoremap <c-q> :q!<enter>
+inoremap <c-q> <esc>:q!<enter>
+vnoremap <c-q> :q!<enter>
+tnoremap <c-q> <c-w>N:q!<CR>
 # joining current line with the one below
-nnoremap J mzJ`z # TODO(bader): learn how
+# TODO(bader): learn how
+# nnoremap J mzJ`z 
 # ----------------------------------------
 # -- tabs --------------------------------
 nnoremap <silent> <a-h> :tabprevious<enter>
@@ -258,6 +264,9 @@ autocmd VimEnter :call g:ListSessions()<CR>
 
 # resizing windows
 # TODO(bader): make c-w enters a mode that allows you to use mappings to increase and decrease etc
-nnoremap <c-<s-i>> :vertical resize +5<CR>
-nnoremap <c-i> :resize +5<CR>
-nnoremap <c-=> <c-w><c-=><CR>:echo "hi"<CR>
+nnoremap <left> :vertical resize +5<CR>
+nnoremap <right> :vertical resize -5<CR>
+nnoremap <up> :horizontal resize +5<CR>
+nnoremap <down> :horizontal resize -5<CR>
+# nnoremap <c-i> :resize +5<CR>
+# nnoremap <c-=> <c-w><c-=><CR>:echo "hi"<CR>

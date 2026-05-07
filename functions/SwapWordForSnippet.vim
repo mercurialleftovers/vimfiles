@@ -12,3 +12,6 @@ def g:SwapWordForSnippet(): void
 		execute "normal <c-n>" # built-in completion
 	endif
 enddef
+
+nnoremap <c-space> :call g:SwapWordForSnippet()<enter><enter>
+inoremap <c-space> <esc>:call g:SwapWordForSnippet()<enter><enter>a

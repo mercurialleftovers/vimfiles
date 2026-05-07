@@ -8,7 +8,7 @@ var TEMPLATES_DIR = $MYVIMDIR .. '\\' .. "templates"
 
 def g:Run_current_file(): void
 	var package_json_exists: bool = findfile("package.json") == "package.json"
-    var interpreters: dict<string> = {python: "python", javascript: (package_json_exists ? "npm run test" : "deno run"), ts: "deno run", html: "start", dosbatch: "call"}
+    var interpreters: dict<string> = {python: "python", javascript: (package_json_exists ? "npm run test" : "deno run"), typescript: "deno lint && deno run", html: "start", dosbatch: "call"}
     # TODO(bader): future-version should substitute the file name into the relevant command in case the format is
     # not as simple as "interpreter %", but instead contains args after the %
     if findfile(g:build_file) == g:build_file

@@ -2,7 +2,7 @@ vim9script
 
 
 def g:MoveSelection2(direction: string): void # direction: Enum{up, down}
-	# echo $"moving line {line('.')}: " .. getline("'<") .. direction
+	# echo "moving line " .. line('.') .. getline("'<") .. direction
 	if direction == "down"
 		if line("'>") == line("$")
 			echo "line is last!"
@@ -11,8 +11,7 @@ def g:MoveSelection2(direction: string): void # direction: Enum{up, down}
 			call g:MoveSelection(direction)
 			return
 		else
-			# execute ":m '>+1<CR>gv="
-			execute ":m .+1<CR>gv="
+			execute ":m .+1<CR>=="
 		endif
 	else
 		if line("'<") == 1
@@ -22,17 +21,16 @@ def g:MoveSelection2(direction: string): void # direction: Enum{up, down}
 			call g:MoveSelection(direction)
 			return
 		else
-			# execute ":m '<-2<CR>gv="
-			execute ":m .-2<CR>gv="
+			execute ":m .-2<CR>=="
 		endif
 	endif
 enddef
 
 def g:MoveSelection(direction: string): void # direction: Enum{up, down}
 	if direction == "down"
-		execute ":m .+1<CR>gv="
+		execute ":m .+1<CR>=="
 	else
-		execute ":m .-2<CR>gv=" # TODO(bader): this way, things are flipped because each line is moved to the next, making it the next "next" line to be moved
+		execute ":m .-2<CR>==" # TODO(bader): this way, things are flipped because each line is moved to the next, making it the next "next" line to be moved
 	endif
 enddef
 
