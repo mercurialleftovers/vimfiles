@@ -1,7 +1,14 @@
 swapdir/*
 backupdir/*
 undodir/*
-__*
+**/__*
 **/.netrwhist
-**/.todo
-
+**/.todo*
+**/.vscode
+**/.env
+**/node_modules
+**/__pycache__
+**/.ruff_cache
+**/.mypy_cache
+**/__scratch__*
+**/.todo.md
