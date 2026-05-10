@@ -26,7 +26,8 @@ syntax on
 &shiftwidth = 4
 &expandtab = true
 
-&guifont = 'Lucida Console:h11:cANSI:qDRAFT'
+&guifont = 'Lucida Console:h12:cANSI:qDRAFT'
+# &guifont = 'Lucida Console:h14:cANSI:qDRAFT'
 &guioptions = "aic"
 g:colors_name = "slate"
 execute $"colorscheme {g:colors_name}"

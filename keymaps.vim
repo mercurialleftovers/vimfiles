@@ -242,7 +242,9 @@ def g:TerminalInputMode(): void
 	endif
 enddef
 
-autocmd TabEnter * :call g:TerminalInputMode()
+autocmd BufEnter *cmd.exe* :call g:TerminalInputMode()
+# autocmd CmdlineEnter * echo "cmdlineenter"
+# autocmd CmdlineLeave * echo "cmdlineleave"
 
 # ----------------------------------------
 # session

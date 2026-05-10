@@ -34,7 +34,12 @@ source $MYVIMDIR/functions/SwapWordForSnippet.vim
 source $MYVIMDIR/functions/CommentLine.vim
 source $MYVIMDIR/functions/ToggleHotReload.vim
 # source $MYVIMDIR/functions/MoveSelection.vim
-autocmd filetype python source $MYVIMDIR/functions/PythonLinters.vim
+
+augroup python
+	autocmd!
+	autocmd filetype python source $MYVIMDIR/functions/PythonLinters.vim
+augroup end
+
 # autocmd filetype python :vim9 echo $"opened a python file!"
 # source $MYVIMDIR/functions/TabEnterToggleTerminalInputMode.vim
 source $MYVIMDIR/keymaps.vim
