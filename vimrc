@@ -22,6 +22,7 @@ $MYVIMDIR = 'C:\Users\ccc\OneDrive\vimfiles'
 
 # source $"{path_to_configs}/settings.vim" # how to construct "jumpable into" path like with $MYVIMDIR/setings.vim
 
+source $MYVIMDIR/plugins.vim
 source $MYVIMDIR/settings.vim
 # functions:
 source $MYVIMDIR/functions/Ubiquitous.vim
