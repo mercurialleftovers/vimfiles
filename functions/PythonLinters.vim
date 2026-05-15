@@ -74,20 +74,29 @@ enddef
 
 
 def g:CallRuffFormatterSilent(): void
-	if executable("ruff") == 0
-		echo "Ruff is not installed!"
-	else
-        var current_file: string = expand("%")
-        echo current_file
+    try
+        var config_file: string = "pyproject.toml"
+        var current_position = winsaveview()
+        if executable("ruff") == 0
+            echo "Ruff is not installed!"
+        else
+            var current_file: string = expand("%")
+            echo current_file
 
-        if findfile("pyproject.toml") == "pyproject.toml"
-            if system("cat pyproject.toml | grep 'ruff'") =~ "ruff"
-                system($"ruff format {current_file}")
+            if findfile(config_file) == config_file
+                if system($"cat {config_file} | grep 'ruff'") =~ "ruff"
+                    system($"ruff format {current_file}")
+                endif
             endif
+            system($"ruff format {current_file} --cache-dir {RUFF_CACHE_DIR}")
         endif
-		system($"ruff format {current_file} --cache-dir {RUFF_CACHE_DIR}")
-		execute "edit %"
-	endif
+        execute ":write!<enter>"
+        # execute ":edit<enter>" # TODO(bader): moved this to the autocmd part
+        # (| edit)
+        winrestview(current_position)
+    catch
+        echo "error formatting on save!"
+    endtry
 enddef
 
 
@@ -114,3 +123,8 @@ inoremap <f9> <ESC>:call g:CallRuffAll()<CR>
 
 nnoremap <f12> :call g:CallRuffFormatterSilent()<CR>
 inoremap <f12> <esc> :call g:CallRuffFormatterSilent()<CR>
+
+augroup autoformat
+    autocmd!
+    autocmd BufWritePost *.py silent! :call g:CallRuffFormatterSilent() | :edit
+augroup end
