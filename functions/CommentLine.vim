@@ -16,6 +16,7 @@ def g:TrueCommentLine(): void
         typescript: $'{spacesfiller}// {contentfiller}',
         cpp: $'{spacesfiller}// {contentfiller}',
         java: $'{spacesfiller}// {contentfiller}',
+        lua: $'{spacesfiller}-- {contentfiller}',
     }
 
     if !commentPatterns->has_key(ft)

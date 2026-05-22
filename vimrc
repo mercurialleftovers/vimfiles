@@ -16,8 +16,10 @@ vim9script
 # [ ] - make SwapWordForSnippet a dynamic function that matches the regex:
 #		- Enum(int, Name) is unpacked to become: class Name(Enum, int):\n or sth, only when a regex is not met, checking the word as an entry is done (the current way)
 # [ ] - learn/use augroups
-set runtimepath^=C:\Users\ccc\OneDrive\vimfiles
-$MYVIMDIR = 'C:\Users\ccc\OneDrive\vimfiles'
+if &term == "win32"
+	set runtimepath^=C:\Users\ccc\OneDrive\vimfiles
+	$MYVIMDIR = 'C:\Users\ccc\OneDrive\vimfiles'
+endif
 # var path_to_configs = $MYVIMDIR
 
 # source $"{path_to_configs}/settings.vim" # how to construct "jumpable into" path like with $MYVIMDIR/setings.vim

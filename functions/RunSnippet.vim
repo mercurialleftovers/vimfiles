@@ -2,7 +2,7 @@ vim9script
 
 
 def g:RunSnippet(): void
-	var interpreters: dict<string> = {python: "python", javascript: "deno run", typescript: "deno run"}
+	var interpreters: dict<string> = {python: "python", javascript: "deno run", typescript: "deno run", lua: "lua"}
 
     if interpreters->has_key(&filetype)
         var interpreter = interpreters[&filetype]
