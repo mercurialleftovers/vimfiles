@@ -2,8 +2,8 @@ vim9script
 
 
 def g:RunSnippet(): void
-	var interpreters: dict<string> = {python: "python", javascript: "deno run", typescript: "deno run", lua: "lua"}
-
+    var pycmd: string = executable("python") ? "python" : "python3"
+	var interpreters: dict<string> = {python: pycmd, javascript: "deno run", typescript: "deno run", lua: "lua"}
     if interpreters->has_key(&filetype)
         var interpreter = interpreters[&filetype]
 		var filename: string = $"__scratch__.{expand('%:e')}"
