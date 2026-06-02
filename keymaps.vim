@@ -169,7 +169,12 @@ def g:CopyIntoTerminal(): void
 enddef
 
 tnoremap <esc> <enter><c-w>N
-tnoremap <c-enter> <enter><c-w>N:q!<enter>
+if !has("guirunning")
+    tnoremap <c-j> <enter><c-w>N:q!<enter>
+else
+    tnoremap <c-enter> <enter><c-w>N:q!<enter>
+endif
+
 tnoremap <c-v> <enter><c-w>N:call CopyIntoTerminal()<enter>
 tnoremap <c-h> <c-w>N<c-w>h
 tnoremap <c-j> <c-w>N<c-w>j
@@ -180,9 +185,15 @@ nnoremap <c-t> :tabnew<enter>
 inoremap <c-t> :tabnew<enter>
 vnoremap <c-t> :tabnew<enter>
 # ----------------------------------------
-nnoremap <c-enter> :term<enter>
-inoremap <c-enter> :term<enter>
-vnoremap <c-enter> :term<enter>
+if has("guirunning")
+    nnoremap <c-enter> :term<enter>
+    inoremap <c-enter> :term<enter>
+    vnoremap <c-enter> :term<enter>
+else
+    nnoremap <c-j> :term<enter>
+    inoremap <c-j> :term<enter>
+    vnoremap <c-j> :term<enter>
+endif
 # ----------------------------------------
 # c-q
 nnoremap <c-q> :q!<enter>
@@ -232,7 +243,9 @@ tnoremap <silent> <c-s-PgDown> <enter><c-w>N:tabm +1<enter>
 tnoremap <silent> <c-s-PgUp> <enter><c-w>N:tabm -1<enter>
 
 def g:TerminalInputMode(): void
-	if bufname() =~ "cmd.exe"
+    var buffername: string = &term == "win32" ? "cmd.exe" : "!/bin/bash"
+
+    if bufname() =~ "cmd.exe"
 		try
 			execute "normal i" # TODO(bader): it is windows only as of now
 		catch
