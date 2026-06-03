@@ -3,12 +3,12 @@ vim9script
 # TODO:
 # [ ] - term ++shll ruff --fix doesn't trigger autoload!
 # [ ] - learn how to mark, and go to mark, use it to make the SwapWordForSnippet go to symbol
-# [ ] - f1, to show special chars, doesn't return the cursor to its og position
+# [*] - f1, to show special chars, doesn't return the cursor to its og position
 # [ ] - move keymaps with the function they call (more goot comparmentalization, less cognitive effor to maintain where keymaps are vs where respective function is
 # [ ] - learn vimregex, and how to do substitutions (patterns, capturing groups etc)
 # [ ] - how to manipulate buffers programmatically: line, getline, $, '<, '>, . etc
-# [ ] - snippet system using SwapWordForSnippet and a $MYVIMDIR/snippets/&filetype folder to read from (maybe json ?)
-# [ ] - vcs and uploading my vimdir to github
+# [*] - snippet system using SwapWordForSnippet and a $MYVIMDIR/snippets/&filetype folder to read from (maybe json ?)
+# [*] - vcs and uploading my vimdir to github
 # [ ] - check cursor shape help (future endeavor, not asap)
 # [ ] - install a git gui tools such as meld and configure its keymaps <c-g>g !meld .<CR> or <c-g>g :call CallMeld()<CR>
 # [ ] - figure out the $ problem in SwapWordForSnippet and the newline problem in json files in the same function
@@ -16,7 +16,7 @@ vim9script
 # [ ] - make SwapWordForSnippet a dynamic function that matches the regex:
 #		- Enum(int, Name) is unpacked to become: class Name(Enum, int):\n or sth, only when a regex is not met, checking the word as an entry is done (the current way)
 # [ ] - learn/use augroups
-if &term == "win32"
+if $OS == "Windows_NT"
 	set runtimepath^=C:\Users\ccc\OneDrive\vimfiles
 	$MYVIMDIR = 'C:\Users\ccc\OneDrive\vimfiles'
 endif
