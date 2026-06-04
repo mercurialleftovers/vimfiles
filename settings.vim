@@ -1,10 +1,12 @@
 vim9script
 
+var is_windows: bool = ($OS == "Windows_NT")
+
 g:interpreters = {python: "python", js: "deno run", ts: "deno run"}
-g:shell_ext = ($OS == "Windows_NT" ? "bat" : "sh")
-g:clear_cmd = ($OS == "Windows_NT" ? "cls" : "clear")
-g:del_cmd = ($OS == "Windows_NT" ? "del /q" : "clear")
-g:back_slash = ($OS == "Windows_NT" ? "\\" : "/")
+g:shell_ext = (is_windows ? "bat" : "sh")
+g:clear_cmd = (is_windows ? "cls" : "clear")
+g:del_cmd = (is_windows ? "del /q" : "clear")
+g:back_slash = (is_windows ? "\\" : "/")
 g:build_file = $"build.{g:shell_ext}"
 
 syntax on
@@ -26,9 +28,14 @@ syntax on
 &shiftwidth = 4
 &expandtab = true
 
-&guifont = 'Lucida Console:h12:cANSI:qDRAFT'
 # &guifont = 'Lucida Console:h14:cANSI:qDRAFT'
-&guioptions = "aic"
+if has("gui_running")
+    &guioptions = "aic"
+    if $OS == "Windows_NT"
+        &guifont = 'Lucida Console:h12:cANSI:qDRAFT'
+        # &renderoptions["type"] = "directx"
+    endif
+endif
 g:colors_name = "slate"
 execute $"colorscheme {g:colors_name}"
 &listchars = 'eol:;,tab:-->,lead:.'
@@ -37,6 +44,7 @@ execute $"colorscheme {g:colors_name}"
 &statusline = $"%2.4n: %f \ \ \ %m %r %h  l%6.8l :c%6.8c %4.4p%%"
 # autocmd BufRead * :set foldmethod=indent
 &foldmethod = "indent"
+set nofoldenable
 &clipboard = 'unnamed,unnamedplus'
 
 &backup = false

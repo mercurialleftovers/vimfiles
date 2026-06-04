@@ -17,9 +17,6 @@ inoremap <c-d> <esc>yyp
 inoremap <c-v> <esc>p
 inoremap <c-x> <esc>dd
 #---------------------------------------
-nnoremap <f1> :call g:Toggle_listchars()<enter>
-vnoremap <f1> <esc>:call g:Toggle_listchars()<enter>
-inoremap <f1> <esc>:call g:Toggle_listchars()<enter>i
 #---------------------------------------
 nnoremap <silent> <f5> :call g:Run_current_file()<enter>
 inoremap <silent> <f5> <esc>:call g:Run_current_file()<enter><enter>
@@ -152,25 +149,20 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap J :m .+1<CR>==
 nnoremap K :m .-2<CR>==
 # some function calls
-vnoremap <f2> <esc>:call g:ToggleNumber()<enter>
-inoremap <f2> <esc>:call g:ToggleNumber()<enter>
-nnoremap <f2> :call g:ToggleNumber()<enter>
 
 vnoremap <f9> <esc>:call g:ToggleHotReload()<enter>
 inoremap <f9> <esc>:call g:ToggleHotReload()<enter>
 nnoremap <f9> :call g:ToggleHotReload()<enter>
 
 
-# nnoremap <f12> :call g:CommentLine()<enter>
-# terminal stuff
-# tnoremap mapping -----------------------
 def g:CopyIntoTerminal(): void
 	execute $"normal! i{@+}"
 enddef
 
 tnoremap <esc> <enter><c-w>N
-if !has("guirunning")
-    tnoremap <c-j> <enter><c-w>N:q!<enter>
+
+if !(has("gui_running"))
+    tnoremap <c-`> <enter><c-w>N:q!<enter>
 else
     tnoremap <c-enter> <enter><c-w>N:q!<enter>
 endif
@@ -185,14 +177,16 @@ nnoremap <c-t> :tabnew<enter>
 inoremap <c-t> :tabnew<enter>
 vnoremap <c-t> :tabnew<enter>
 # ----------------------------------------
-if has("guirunning")
+if has("gui_running")
     nnoremap <c-enter> :term<enter>
     inoremap <c-enter> :term<enter>
     vnoremap <c-enter> :term<enter>
+    echo "c-enter"
 else
-    nnoremap <c-j> :term<enter>
-    inoremap <c-j> :term<enter>
-    vnoremap <c-j> :term<enter>
+    nnoremap <c-`> :term<enter>
+    inoremap <c-`> :term<enter>
+    vnoremap <c-`> :term<enter>
+    echo "c-`"
 endif
 # ----------------------------------------
 # c-q
@@ -242,20 +236,6 @@ tnoremap <silent> <a-s-l> <enter><c-s-w>N:tabm +1<enter>
 tnoremap <silent> <c-s-PgDown> <enter><c-w>N:tabm +1<enter>
 tnoremap <silent> <c-s-PgUp> <enter><c-w>N:tabm -1<enter>
 
-def g:TerminalInputMode(): void
-    var buffername: string = &term == "win32" ? "cmd.exe" : "!/bin/bash"
-
-    if bufname() =~ "cmd.exe"
-		try
-			execute "normal i" # TODO(bader): it is windows only as of now
-		catch
-			# "not modifiable"
-			# echo "not modifiable error fired!"
-		endtry
-	endif
-enddef
-
-autocmd BufEnter *cmd.exe* :call g:TerminalInputMode()
 # autocmd CmdlineEnter * echo "cmdlineenter"
 # autocmd CmdlineLeave * echo "cmdlineleave"
 
