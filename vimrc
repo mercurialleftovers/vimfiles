@@ -16,8 +16,8 @@ vim9script
 # [ ] - make SwapWordForSnippet a dynamic function that matches the regex:
 #		- Enum(int, Name) is unpacked to become: class Name(Enum, int):\n or sth, only when a regex is not met, checking the word as an entry is done (the current way)
 # [ ] - learn/use augroups
-echo "termmode = " .. &term
-echo "gui_running = " .. has("gui_running")
+# echo "termmode = " .. &term
+# echo "gui_running = " .. has("gui_running")
 
 if $OS == "Windows_NT"
 	set runtimepath^=C:\Users\ccc\OneDrive\vimfiles
@@ -40,6 +40,7 @@ source $MYVIMDIR/functions/SwapWordForSnippet.vim
 source $MYVIMDIR/functions/CommentLine.vim
 source $MYVIMDIR/functions/ToggleHotReload.vim
 source $MYVIMDIR/functions/TerminalInputMode.vim
+source $MYVIMDIR/functions/WebSearch.vim
 # source $MYVIMDIR/functions/MoveSelection.vim
 
 augroup python

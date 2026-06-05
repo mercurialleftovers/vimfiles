@@ -182,12 +182,12 @@ if has("gui_running")
     inoremap <c-enter> :term<enter>
     vnoremap <c-enter> :term<enter>
     echo "c-enter"
-else
-    nnoremap <c-`> :term<enter>
-    inoremap <c-`> :term<enter>
-    vnoremap <c-`> :term<enter>
-    echo "c-`"
 endif
+
+# both gui mode and console mode get c-`
+nnoremap <c-`> :term<enter>
+inoremap <c-`> :term<enter>
+vnoremap <c-`> :term<enter>
 # ----------------------------------------
 # c-q
 nnoremap <c-q> :q!<enter>

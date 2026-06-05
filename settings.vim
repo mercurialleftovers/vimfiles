@@ -32,7 +32,7 @@ syntax on
 if has("gui_running")
     &guioptions = "aic"
     if $OS == "Windows_NT"
-        &guifont = 'Lucida Console:h12:cANSI:qDRAFT'
+        &guifont = 'Lucida Console:h11:cANSI:qDRAFT'
         # &renderoptions["type"] = "directx"
     endif
 endif
