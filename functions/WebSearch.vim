@@ -48,3 +48,9 @@ def g:SearchWeb(kw: string): void
 enddef
 
 :command -nargs=* Webget call g:SearchWeb("<args>")
+:command -nargs=* WG call g:SearchWeb("<args>")
+
+:command -nargs=* GG call g:SearchWeb("g <args>")
+:command -nargs=* DD call g:SearchWeb("d <args>")
+:command -nargs=* YY call g:SearchWeb("y <args>")
+
