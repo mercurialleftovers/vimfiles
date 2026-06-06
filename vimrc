@@ -27,6 +27,9 @@ endif
 
 # source $"{path_to_configs}/settings.vim" # how to construct "jumpable into" path like with $MYVIMDIR/setings.vim
 
+
+
+
 source $MYVIMDIR/plugins.vim
 source $MYVIMDIR/settings.vim
 # functions:
@@ -58,3 +61,16 @@ if &term == "win32"
 endif
 # autocm BufWritePost * call g:HotReload()
 # autocmd TabEnter * :call TabEnterToggleTerminalInputMode()<CR>
+
+# &path = &path .. $", {$MYVIMDIR}"
+# 
+# vim9script
+# var paths = &path->split(',')
+# for i in range(len(paths) - 1)
+    # echo paths[i]
+# endfor
+# echo &path->split(',')
+
+# autocmd DirOpen *
+    # &path = &path .. $", {getcurdir('.')}"
+# autoclose
