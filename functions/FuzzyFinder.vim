@@ -1,39 +1,32 @@
 vim9script
 
-var FINDER_CMD = "fzf"
+var FZF: string = "fzf"
 
 def g:InvokeFinder(): void
-    if !executable(FINDER_CMD)
-        echo $"error {FINDER_CMD} not found"
+    echo "asdasdasd"
+    if !executable(FZF)
+        echo FZF .. " not installed"
         return
     endif
 
-    var cursor = winsaveview()
+    var modes = ["e", "sp", "vsp", "tabnew", "r"]
+    var file: string = trim(system(FZF))
 
-    var modes = ["e", "sp", "vsp", "tabnew", "r"] # r is for adding a file to the current one
-    var prompt: string = ""
-
-    for i in range(len(modes))
-        # prompt = prompt .. $"{i + 1}: {modes[i]}\n" # removed numbers as it
-        # is confusing
-        prompt = prompt .. $"\t-> {modes[i]}\n"
-    endfor
-
-    prompt = prompt .. "> "
-
-    var mode: string = input(prompt)
-
-    if index(modes, mode) == -1
+    if file == ""
         return
     endif
 
-    var file: string = system(FINDER_CMD)
-    if file->trim() == ""
-        return
-    endif
+    echo $"file = {file}"
+    var mode: string = input(join(modes, '\n')) .. ' > '
+    # TODO(bader): you can remove the next if statement and keep things
+    # dynamic, i.e., you input the command yourself
+    echo $"mode = {mode}"
+
+    # if index(modes, mode) == -1
+        # mode = 'vsp'
+    # endif
+
     execute $":{mode} {file}"
-
-    winrestview(cursor)
 enddef
 
 nnoremap <c-p> :call g:InvokeFinder()<CR>

@@ -44,6 +44,9 @@ source $MYVIMDIR/functions/CommentLine.vim
 source $MYVIMDIR/functions/ToggleHotReload.vim
 source $MYVIMDIR/functions/TerminalInputMode.vim
 source $MYVIMDIR/functions/WebSearch.vim
+source $MYVIMDIR/functions/FuzzyFinder.vim
+source $MYVIMDIR/functions/ControlFontSize.vim
+source $MYVIMDIR/functions/RestartVim.vim
 # source $MYVIMDIR/functions/MoveSelection.vim
 
 augroup python

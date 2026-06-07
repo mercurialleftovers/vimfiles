@@ -19,8 +19,6 @@ engines["g"] = $"https://www.google.com/search?q={QUERYHERE}&udm=14"
 engines["d"] = $"https://www.duckduckgo.com/search?q={QUERYHERE}"
 engines["y"] = $"https://www.youtube.com/search?q={QUERYHERE}"
 
-echo engines['g']
-
 def g:SearchWeb(kw: string): void
     var splits = kw->split(' ', false)
     var engine: string = splits[0]
@@ -53,4 +51,3 @@ enddef
 :command -nargs=* GG call g:SearchWeb("g <args>")
 :command -nargs=* DD call g:SearchWeb("d <args>")
 :command -nargs=* YY call g:SearchWeb("y <args>")
-
