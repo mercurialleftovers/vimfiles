@@ -4,13 +4,10 @@ vim9script
 # [ ] - how to resolve paths (backslashes) os-agnostically
 # [ ] - calling external cli tools (ruff) and executing other commands (edit %) while
 # the term running the cli tool is still open causes an error (you need to async dispatch)
-var MYPY_CACHE_DIR: string = $"{getenv('HOME')}\\.mypy_cache"
-var RUFF_CACHE_DIR: string = $"{getenv('HOME')}\\.ruff_cache"
+var MYPY_CACHE_DIR: string = substitute($"{getenv('HOME')}{g:sep}.mypy_cache", '\', g:sep, 'g')
+var RUFF_CACHE_DIR: string = substitute($"{getenv('HOME')}{g:sep}.ruff_cache", '\', g:sep, 'g')
+
 var autoformat: bool = true
-&formatexpr = ""
-if executable("black")
-    &formatprg = "black -q -"
-endif
 
 def  g:CallMyPyFormatter(): void
 	if executable("mypy") == 0
@@ -33,7 +30,6 @@ def  g:CallRuffFormatter(): void
         else
             execute $"term ++shell ruff format % --cache-dir {RUFF_CACHE_DIR}"
         endif
-        # execute "edit %"
 	endif
 enddef
 
@@ -50,7 +46,6 @@ def  g:CallRuffFixer(): void
         else
             execute $"term ++shell ruff check --fix % --cache-dir {RUFF_CACHE_DIR}"
         endif
-        # execute "edit %"
 	endif
 enddef
 
@@ -67,7 +62,6 @@ def  g:CallRuffAll(): void
         else
             execute $"term ++shell ruff format . && ruff check --fix . --cache-dir {RUFF_CACHE_DIR}"
         endif
-        # execute "edit %"
 	endif
 enddef
 
@@ -91,8 +85,6 @@ def g:CallRuffFormatterSilent(): void
             system($"ruff format {current_file} --cache-dir {RUFF_CACHE_DIR}")
         endif
         execute ":write!<enter>"
-        # execute ":edit<enter>" # TODO(bader): moved this to the autocmd part
-        # (| edit)
         winrestview(current_position)
     catch
         echo "error formatting on save!"

@@ -19,9 +19,11 @@ vim9script
 # echo "termmode = " .. &term
 # echo "gui_running = " .. has("gui_running")
 
+g:sep = '/'
 if $OS == "Windows_NT"
 	set runtimepath^=C:\Users\ccc\OneDrive\vimfiles
 	$MYVIMDIR = 'C:\Users\ccc\OneDrive\vimfiles'
+    # g:sep = '\'
 endif
 # var path_to_configs = $MYVIMDIR
 
@@ -45,9 +47,11 @@ source $MYVIMDIR/functions/ToggleHotReload.vim
 source $MYVIMDIR/functions/TerminalInputMode.vim
 source $MYVIMDIR/functions/WebSearch.vim
 source $MYVIMDIR/functions/FuzzyFinder.vim
-source $MYVIMDIR/functions/ControlFontSize.vim
 source $MYVIMDIR/functions/RestartVim.vim
 # source $MYVIMDIR/functions/MoveSelection.vim
+if has("gui_running")
+    source $MYVIMDIR/functions/ControlFontSize.vim
+endif
 
 augroup python
 	autocmd!
