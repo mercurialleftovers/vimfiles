@@ -13,3 +13,4 @@ plugged/*
 **/.mypy_cache
 **/__scratch__*
 **/.todo.md
+temp/*

@@ -15,7 +15,10 @@ def g:Run_current_file(): void
     if findfile(g:build_file) == g:build_file
         execute $"term ++shell {g:clear_cmd} && .{g:back_slash}{g:build_file}" # TODO(bader): terminal mode
     elseif interpreters->has_key(&filetype)
-		var cmd: string = $"term ++shell {interpreters[&filetype]} %"
+        # var fpath: string = expand('%')
+        # var cmd: string = $"term ++shell {interpreters[&filetype]} {fpath}"
+		var cmd: string = $"term ++shell \"{interpreters[&filetype]} %\""
+		echo cmd
         execute cmd
     elseif &filetype == "vim"
         execute "source %"

@@ -1,32 +1,33 @@
 vim9script
 
 var FZF: string = "fzf"
+var SEP: string = '\\'
+var BASEDIR: string = $MYVIMDIR
+
+if BASEDIR[-1 :] == '\'
+    BASEDIR = BASEDIR[: -2]
+endif
+
+var TEMP_FILE: string = BASEDIR .. '\temp\filename'
+TEMP_FILE = substitute(TEMP_FILE, '\', '/', 'g')
 
 def g:InvokeFinder(): void
-    echo "asdasdasd"
     if !executable(FZF)
         echo FZF .. " not installed"
         return
     endif
 
-    var modes = ["e", "sp", "vsp", "tabnew", "r"]
-    var file: string = trim(system(FZF))
-
-    if file == ""
+    var quoted_temp: string = '"' .. TEMP_FILE .. '"'
+    execute $':!{FZF} > {quoted_temp}'
+    var filename: string = trim(readfile(TEMP_FILE)[0])
+    if filename == ""
         return
     endif
 
-    echo $"file = {file}"
-    var mode: string = input(join(modes, '\n')) .. ' > '
-    # TODO(bader): you can remove the next if statement and keep things
-    # dynamic, i.e., you input the command yourself
-    echo $"mode = {mode}"
+    var mode: string = input('> ')
+    execute $":{mode} {filename}"
 
-    # if index(modes, mode) == -1
-        # mode = 'vsp'
-    # endif
 
-    execute $":{mode} {file}"
 enddef
 
 nnoremap <c-p> :call g:InvokeFinder()<CR>

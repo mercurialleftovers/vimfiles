@@ -30,9 +30,15 @@ syntax on
 
 # &guifont = 'Lucida Console:h14:cANSI:qDRAFT'
 if has("gui_running")
-    &guioptions = "aic"
+    &guioptions = "aic!"
     if $OS == "Windows_NT"
         &guifont = 'Lucida Console:h11:cANSI:qDRAFT'
+        if executable("bash")
+            &shell = 'C:\tools\Git\usr\bin\bash.exe'
+            set shellcmdflag=--login\ -c
+            set shellxquote=\"
+            set shellslash
+        endif
         # &renderoptions["type"] = "directx"
     endif
 endif
