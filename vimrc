@@ -1,7 +1,6 @@
 vim9script
 
 # TODO:
-# [ ] - term ++shll ruff --fix doesn't trigger autoload!
 # [ ] - learn how to mark, and go to mark, use it to make the SwapWordForSnippet go to symbol
 # [*] - f1, to show special chars, doesn't return the cursor to its og position
 # [ ] - move keymaps with the function they call (more goot comparmentalization, less cognitive effor to maintain where keymaps are vs where respective function is
@@ -26,17 +25,11 @@ if $OS == "Windows_NT"
     # g:sep = '\'
 endif
 # var path_to_configs = $MYVIMDIR
-
 # source $"{path_to_configs}/settings.vim" # how to construct "jumpable into" path like with $MYVIMDIR/setings.vim
-
-
-
-
 source $MYVIMDIR/plugins.vim
 source $MYVIMDIR/settings.vim
 # functions:
 source $MYVIMDIR/functions/Ubiquitous.vim
-# 
 source $MYVIMDIR/functions/ToggleFullScreen.vim
 source $MYVIMDIR/functions/RunSnippet.vim
 source $MYVIMDIR/functions/RunCurrentFile.vim
@@ -66,5 +59,3 @@ source $MYVIMDIR/git.vim
 if &term == "win32"
 	source $MYVIMDIR/cursor.vim
 endif
-# autocm BufWritePost * call g:HotReload()
-# autocmd TabEnter * :call TabEnterToggleTerminalInputMode()<CR>

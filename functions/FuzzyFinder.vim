@@ -1,9 +1,9 @@
 vim9script
 
 var FZF: string = "fzf"
-var SEP: string = '\\'
 var BASEDIR: string = $MYVIMDIR
 
+# the next if statement (as well as other things) by Claude - Ashamingly said !
 if BASEDIR[-1 :] == '\'
     BASEDIR = BASEDIR[: -2]
 endif
@@ -19,7 +19,13 @@ def g:InvokeFinder(): void
 
     var quoted_temp: string = '"' .. TEMP_FILE .. '"'
     execute $':!{FZF} > {quoted_temp}'
-    var filename: string = trim(readfile(TEMP_FILE)[0])
+
+    var fileContent = readfile(TEMP_FILE)
+    if len(fileContent) == 0
+        return
+    endif
+
+    var filename: string = trim(fileContent[0])
     if filename == ""
         return
     endif
